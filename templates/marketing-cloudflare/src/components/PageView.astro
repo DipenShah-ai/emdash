@@ -2,6 +2,7 @@
 import type { ContentEntry } from "emdash";
 import type { Page } from "../../emdash-env";
 import MarketingBlocks from "./MarketingBlocks.astro";
+import DentalBlocks from "./DentalBlocks.astro";
 
 interface Props {
 	page: ContentEntry<Page>;
@@ -13,7 +14,8 @@ const { page, heading } = Astro.props;
 const title = heading ?? page.data.title;
 const titleEdit = heading === undefined ? page.edit.title : {};
 const blocks = page.data.content ?? [];
-const hasHero = blocks.some((block) => block._type === "marketing_hero");
+const isDental = blocks.some((block) => String(block._type).startsWith("dental_") || ["treatment_icon_grid", "doctor_trust_snapshot", "symptom_matcher", "faq_accordion", "clinic_location_cta", "appointment_widget", "rich_content_section"].includes(String(block._type)));
+const hasHero = blocks.some((block) => block._type === "marketing_hero" || block._type === "dental_hero");
 ---
 
 {
@@ -27,7 +29,7 @@ const hasHero = blocks.some((block) => block._type === "marketing_hero");
 				</header>
 			)}
 			<div class="page-blocks" {...page.edit.content}>
-				<MarketingBlocks value={blocks} />
+				{isDental ? <DentalBlocks value={blocks} /> : <MarketingBlocks value={blocks} />}
 			</div>
 		</>
 	) : (
