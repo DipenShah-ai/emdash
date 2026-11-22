@@ -2,31 +2,41 @@
 import { decodeSlug, getEmDashEntry, getSeoMeta } from "emdash";
 import Base from "../layouts/Base.astro";
 import PageView from "../components/PageView.astro";
+import { PortableText } from "emdash/ui";
 import { heroSeoDefaults } from "../utils/page";
 
 const slug = decodeSlug(Astro.params.slug);
 if (!slug) return Astro.rewrite("/404");
 
 const { entry: page, cacheHint } = await getEmDashEntry("pages", slug);
-if (!page) return Astro.rewrite("/404");
+const clinicResult = page ? null : await getEmDashEntry("clinic_page", slug);
+const clinicPage = clinicResult?.entry;
+if (!page && !clinicPage) return Astro.rewrite("/404");
 
-if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+if (Astro.cache?.enabled) Astro.cache.set(page ? cacheHint : clinicResult?.cacheHint);
 
-const seo = getSeoMeta(page, {
+const seo = getSeoMeta((page ?? clinicPage)!, {
 	siteUrl: Astro.url.origin,
 	path: `/${page.id}`,
-	...heroSeoDefaults(page.data.content, Astro.url.origin),
+	...(page ? heroSeoDefaults(page.data.content, Astro.url.origin) : {}),
 });
 ---
 
 <Base
 	title={seo.title}
-	pageTitle={page.data.title}
+	pageTitle={(page ?? clinicPage)!.data.title}
 	description={seo.description}
 	image={seo.ogImage}
 	canonical={seo.canonical}
 	robots={seo.robots}
-	content={{ collection: "pages", id: page.data.id, slug: page.id }}
+	content={{ collection: page ? "pages" : "clinic_page", id: (page ?? clinicPage)!.data.id, slug }}
 >
-	<PageView page={page} />
+	{page ? <PageView page={page} /> : (
+    <article class="container" style="padding-block: 3rem 6rem; max-width: 900px;">
+      <h1>{clinicPage!.data.title}</h1>
+      <div class="imported-prose" {...clinicPage!.edit.content}>
+        <PortableText value={clinicPage!.data.content ?? []} />
+      </div>
+    </article>
+  )}
 </Base>
