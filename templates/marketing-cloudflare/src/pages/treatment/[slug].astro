@@ -1,0 +1,35 @@
+---
+import { decodeSlug, getEmDashEntry, getSeoMeta } from "emdash";
+import { PortableText } from "emdash/ui";
+import Base from "../../layouts/Base.astro";
+
+const slug = decodeSlug(Astro.params.slug);
+if (!slug) return Astro.rewrite("/404");
+
+const { entry: treatment, cacheHint } = await getEmDashEntry("treatment", slug);
+if (!treatment) return Astro.rewrite("/404");
+if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+
+const seo = getSeoMeta(treatment, {
+  siteUrl: Astro.url.origin,
+  path: `/treatment/${slug}`,
+});
+---
+
+<Base
+  title={seo.title}
+  pageTitle={treatment.data.title}
+  description={seo.description}
+  canonical={seo.canonical}
+  image={seo.ogImage}
+  robots={seo.robots}
+  content={{ collection: "treatment", id: treatment.data.id, slug }}
+>
+  <article class="container" style="padding-block: 3rem 6rem; max-width: 900px;">
+    <a href="/treatments">All treatments</a>
+    <h1 {...treatment.edit.title}>{treatment.data.title}</h1>
+    <div class="imported-prose" {...treatment.edit.content}>
+      <PortableText value={treatment.data.content ?? []} />
+    </div>
+  </article>
+</Base>
