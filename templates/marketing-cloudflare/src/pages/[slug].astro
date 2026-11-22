@@ -17,7 +17,7 @@ if (Astro.cache?.enabled) Astro.cache.set(page ? cacheHint : clinicResult?.cache
 
 const seo = getSeoMeta((page ?? clinicPage)!, {
 	siteUrl: Astro.url.origin,
-	path: `/${page.id}`,
+	path: `/${slug}`,
 	...(page ? heroSeoDefaults(page.data.content, Astro.url.origin) : {}),
 });
 ---
