@@ -5,90 +5,31 @@ import Base from "../../layouts/Base.astro";
 
 const slug = decodeSlug(Astro.params.slug);
 if (!slug) return Astro.rewrite("/404");
-let result: any;
-try { result = await getEmDashEntry("treatments", slug); } catch { result = null; }
-if (!result?.entry) result = await getEmDashEntry("treatment", slug);
-const treatment = result?.entry;
+
+const { entry: treatment, cacheHint } = await getEmDashEntry("treatment", slug);
 if (!treatment) return Astro.rewrite("/404");
-if (Astro.cache?.enabled) Astro.cache.set(result.cacheHint);
-const d: any = treatment.data;
-const hasDetailedFields = Boolean(d.headline || d.why_matters);
-const parseJson = (value: any, fallback: any) => {
-  if (value == null) return fallback;
-  if (typeof value !== "string") return value;
-  try { return JSON.parse(value); } catch { return fallback; }
-};
-const symptoms: string[] = parseJson(d.symptoms_json, []);
-const comparisons: any[] = parseJson(d.comparison_json, []);
-const steps: any[] = parseJson(d.steps_json, []);
-const care: any = parseJson(d.care_tabs_json, {});
-const factors: string[] = parseJson(d.plan_factors_json, []);
-const faqs: any[] = parseJson(d.faqs_json, []);
-const seo = getSeoMeta(treatment, { siteUrl: Astro.url.origin, path: `/treatments/${slug}` });
+if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+
+const seo = getSeoMeta(treatment, {
+  siteUrl: Astro.url.origin,
+  path: `/treatments/${slug}`,
+});
 ---
-<Base title={seo.title} pageTitle={d.title} description={seo.description} canonical={seo.canonical}
-  image={seo.ogImage} robots={seo.robots}
-  content={{ collection: hasDetailedFields ? "treatments" : "treatment", id: d.id, slug }}>
-  <article class="dental-treatment">
-    <header class="treatment-hero"><div class="treatment-wrap">
-      <a href="/treatments" class="breadcrumb">← All treatments</a>
-      <p class="eyebrow">Dental Treatment</p>
-      <h1 {...treatment.edit.title}>{d.headline || d.title}</h1>
-      {d.excerpt && <p class="lead">{d.excerpt}</p>}
-      {hasDetailedFields && <div class="meta">
-        {d.duration && <span><strong>Chair time:</strong> {d.duration}</span>}
-        {d.visits && <span><strong>Visits:</strong> {d.visits}</span>}
-        {d.comfort_note && <span><strong>Comfort:</strong> {d.comfort_note}</span>}
-      </div>}
-      <a href="/book-appointment" class="cta">Request an appointment</a>
-    </div></header>
-    <div class="treatment-wrap treatment-body">
-      {hasDetailedFields ? (
-        <>
-          {symptoms.length > 0 && <section><h2>Symptoms and reasons to visit</h2><ul>{symptoms.map(s => <li>{s}</li>)}</ul></section>}
-          {d.why_matters && <section><h2>Why timely care matters</h2><p>{d.why_matters}</p></section>}
-          {comparisons.length > 0 && <section><h2>Compare your options</h2><div class="comparison-grid">{comparisons.map((item: any) => <div class="treatment-card">
-            <h3>{item.option}</h3><p>{item.bestFor}</p><p><strong>Visits:</strong> {item.visits}</p><p><strong>Comfort:</strong> {item.comfort}</p>
-          </div>)}</div></section>}
-          {steps.length > 0 && <section><h2>How treatment works</h2><ol class="steps">{steps.map((step: any) => <li>
-            <h3>{step.title}</h3><p>{step.desc}</p>
-          </li>)}</ol></section>}
-          {Object.keys(care).length > 0 && <section><h2>Before, during and after care</h2><div class="care-grid">
-            {Object.entries(care).map(([heading, items]) => <div class="treatment-card"><h3>{heading.charAt(0).toUpperCase()+heading.slice(1)}</h3>
-              <ul>{(Array.isArray(items) ? items : []).map((v: any) => <li>{v}</li>)}</ul></div>)}
-          </div></section>}
-          {factors.length > 0 && <section><h2>What determines your treatment plan</h2><ul>{factors.map(factor => <li>{factor}</li>)}</ul></section>}
-          {d.clinical_note && <section class="clinical-note"><h2>Clinical note</h2><p>{d.clinical_note}</p></section>}
-          {faqs.length > 0 && <section><h2>Frequently asked questions</h2>{faqs.map((faq: any) => <details class="treatment-card"><summary>{faq.q || faq.question}</summary><p>{faq.a || faq.answer}</p></details>)}</section>}
-        </>
-      ) : (
-        <div class="prose" {...treatment.edit.content}><PortableText value={d.content || []} /></div>
-      )}
-      <p><a class="cta" href="/book-appointment">Request a consultation</a></p>
+
+<Base
+  title={seo.title}
+  pageTitle={treatment.data.title}
+  description={seo.description}
+  canonical={seo.canonical}
+  image={seo.ogImage}
+  robots={seo.robots}
+  content={{ collection: "treatment", id: treatment.data.id, slug }}
+>
+  <article class="container" style="padding-block: 3rem 6rem; max-width: 900px;">
+    <a href="/treatments">All treatments</a>
+    <h1 {...treatment.edit.title}>{treatment.data.title}</h1>
+    <div class="imported-prose" {...treatment.edit.content}>
+      <PortableText value={treatment.data.content ?? []} />
     </div>
   </article>
 </Base>
-<style>
-.dental-treatment{font-family:var(--font-body,system-ui)}
-.treatment-wrap{max-width:1020px;margin:0 auto;padding-inline:24px}
-.treatment-hero{padding:80px 0;background:linear-gradient(120deg,#e8f6f3,#f5f9fb);color:#173e45}
-.treatment-hero h1{font-size:clamp(2.2rem,4.6vw,4.3rem);line-height:1.12;max-width:19ch;margin-block:16px}
-.lead{font-size:1.25rem;line-height:1.65;max-width:65ch}
-.eyebrow{letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:#167d79;font-size:.8rem;margin-top:26px}
-.breadcrumb{font-size:.9rem}
-.meta{display:flex;gap:14px;flex-wrap:wrap;margin:24px 0}
-.meta span{padding:9px 13px;border-radius:8px;background:#fff;border:1px solid #c8e3df}
-.cta{display:inline-block;padding:14px 22px;background:#147f7b;color:white;text-decoration:none;border-radius:9px;font-weight:700;margin-top:15px}
-.treatment-body{padding-block:40px 90px}
-.treatment-body section{padding:30px 0;border-bottom:1px solid #dce9e8}
-.treatment-body h2{font-size:clamp(1.6rem,3vw,2.3rem);margin-bottom:22px}
-.treatment-body h3{font-size:1.16rem;font-weight:700;margin:0 0 10px}
-.treatment-body li{margin:10px 0;line-height:1.65}
-.treatment-body p{line-height:1.7}
-.treatment-card{border:1px solid #d5e7e4;padding:24px;border-radius:14px;background:var(--color-surface,#fff);margin-bottom:14px}
-.comparison-grid,.care-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:14px}
-.steps{padding-left:27px}
-.steps li{padding:8px 10px}
-.clinical-note{background:#f0f9f8;border-radius:12px;padding-inline:22px!important}
-summary{cursor:pointer;font-weight:700}
-</style>
