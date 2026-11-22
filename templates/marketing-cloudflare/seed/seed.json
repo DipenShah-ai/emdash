@@ -1,1021 +1,1614 @@
 {
-	"$schema": "https://emdashcms.com/seed.schema.json",
-	"version": "1",
-	"meta": {
-		"name": "Marketing Starter",
-		"description": "A photo-led marketing site for a product or service, built from modular blocks",
-		"author": "EmDash"
-	},
-	"settings": {
-		"title": "Halden",
-		"tagline": "Energy intelligence for commercial buildings",
-		"seo": { "titleSeparator": "—" }
-	},
-	"blockTypes": [
-		{
-			"slug": "marketing_hero",
-			"label": "Hero",
-			"description": "A prominent page introduction with optional calls to action and media",
-			"icon": "sparkle",
-			"category": "Marketing",
-			"currentVersion": 1,
-			"versions": [
-				{
-					"version": 1,
-					"fields": [
-						{ "slug": "headline", "label": "Headline", "type": "string", "required": true },
-						{ "slug": "subheadline", "label": "Subheadline", "type": "text" },
-						{ "slug": "primary_cta_label", "label": "Primary button text", "type": "string" },
-						{
-							"slug": "primary_cta_url",
-							"label": "Primary button link (starts with /, https://, mailto:, tel: or #)",
-							"type": "string",
-							"validation": { "pattern": "^(?:$|(?:https?://|mailto:|tel:|/(?!/)|#).+)$" }
-						},
-						{ "slug": "secondary_cta_label", "label": "Secondary button text", "type": "string" },
-						{
-							"slug": "secondary_cta_url",
-							"label": "Secondary button link (starts with /, https://, mailto:, tel: or #)",
-							"type": "string",
-							"validation": { "pattern": "^(?:$|(?:https?://|mailto:|tel:|/(?!/)|#).+)$" }
-						},
-						{ "slug": "image", "label": "Image", "type": "image" },
-						{
-							"slug": "image_caption",
-							"label": "Image caption (shown on the photo)",
-							"type": "string"
-						},
-						{
-							"slug": "eyebrow",
-							"label": "Announcement (shown above the headline)",
-							"type": "string"
-						},
-						{
-							"slug": "eyebrow_url",
-							"label": "Announcement link (starts with /, https://, mailto:, tel: or #)",
-							"type": "string",
-							"validation": { "pattern": "^(?:$|/(?!/|\\\\).*|(?:https?://|mailto:|tel:|#).+)$" }
-						},
-						{
-							"slug": "centered",
-							"label": "Center the layout",
-							"type": "boolean",
-							"defaultValue": false
-						},
-						{
-							"slug": "anchor_id",
-							"label": "Section ID (lowercase, for links like /#pricing)",
-							"type": "string",
-							"validation": { "pattern": "^(?:$|[a-z][a-z0-9_-]*)$" }
-						}
-					]
-				}
-			]
-		},
-		{
-			"slug": "marketing_features",
-			"label": "Features",
-			"description": "A grid of product or service features",
-			"icon": "squares-four",
-			"category": "Marketing",
-			"currentVersion": 1,
-			"versions": [
-				{
-					"version": 1,
-					"fields": [
-						{ "slug": "headline", "label": "Headline", "type": "string", "required": true },
-						{
-							"slug": "subheadline",
-							"label": "Second sentence (shown muted after the headline)",
-							"type": "text"
-						},
-						{ "slug": "eyebrow", "label": "Label above headline", "type": "string" },
-						{
-							"slug": "features",
-							"label": "Features",
-							"type": "repeater",
-							"required": true,
-							"validation": {
-								"minItems": 1,
-								"maxItems": 12,
-								"subFields": [
-									{
-										"slug": "icon",
-										"label": "Icon",
-										"type": "select",
-										"required": true,
-										"options": [
-											"zap",
-											"shield",
-											"users",
-											"chart",
-											"code",
-											"globe",
-											"heart",
-											"star",
-											"check",
-											"lock",
-											"clock",
-											"cloud",
-											"building",
-											"leaf",
-											"gauge",
-											"thermometer",
-											"plug",
-											"bell",
-											"file",
-											"sun",
-											"trend"
-										]
-									},
-									{ "slug": "title", "label": "Title", "type": "string", "required": true },
-									{
-										"slug": "description",
-										"label": "Description (leave a blank line between paragraphs)",
-										"type": "text",
-										"required": true
-									}
-								]
-							}
-						},
-						{
-							"slug": "anchor_id",
-							"label": "Section ID (lowercase, for links like /#pricing)",
-							"type": "string",
-							"validation": { "pattern": "^(?:$|[a-z][a-z0-9_-]*)$" }
-						}
-					]
-				}
-			]
-		},
-		{
-			"slug": "marketing_testimonials",
-			"label": "Testimonials",
-			"description": "Customer quotes and attribution. The first quote is shown large",
-			"icon": "quotes",
-			"category": "Marketing",
-			"currentVersion": 1,
-			"versions": [
-				{
-					"version": 1,
-					"fields": [
-						{
-							"slug": "headline",
-							"label": "Section label (small text above the quotes)",
-							"type": "string"
-						},
-						{
-							"slug": "testimonials",
-							"label": "Testimonials",
-							"type": "repeater",
-							"required": true,
-							"validation": {
-								"minItems": 1,
-								"maxItems": 12,
-								"subFields": [
-									{
-										"slug": "quote",
-										"label": "Quote (leave a blank line between paragraphs)",
-										"type": "text",
-										"required": true
-									},
-									{ "slug": "author", "label": "Author name", "type": "string", "required": true },
-									{ "slug": "role", "label": "Role or title", "type": "string" },
-									{ "slug": "company", "label": "Company", "type": "string" },
-									{
-										"slug": "avatar",
-										"label": "Avatar (initials show when empty)",
-										"type": "image"
-									}
-								]
-							}
-						},
-						{
-							"slug": "anchor_id",
-							"label": "Section ID (lowercase, for links like /#pricing)",
-							"type": "string",
-							"validation": { "pattern": "^(?:$|[a-z][a-z0-9_-]*)$" }
-						}
-					]
-				}
-			]
-		},
-		{
-			"slug": "marketing_pricing",
-			"label": "Pricing",
-			"description": "A comparison of up to three pricing plans",
-			"icon": "tag",
-			"category": "Marketing",
-			"currentVersion": 1,
-			"versions": [
-				{
-					"version": 1,
-					"fields": [
-						{ "slug": "headline", "label": "Headline", "type": "string" },
-						{
-							"slug": "plans",
-							"label": "Plans",
-							"type": "repeater",
-							"required": true,
-							"validation": {
-								"minItems": 1,
-								"maxItems": 3,
-								"subFields": [
-									{ "slug": "name", "label": "Plan name", "type": "string", "required": true },
-									{ "slug": "price", "label": "Price", "type": "string", "required": true },
-									{ "slug": "period", "label": "Period", "type": "string" },
-									{
-										"slug": "description",
-										"label": "Description (leave a blank line between paragraphs)",
-										"type": "text"
-									},
-									{ "slug": "features", "label": "Features (one per line)", "type": "text" },
-									{
-										"slug": "cta_label",
-										"label": "Button text",
-										"type": "string",
-										"required": true
-									},
-									{
-										"slug": "cta_url",
-										"label": "Button link (starts with /, https://, mailto:, tel: or #)",
-										"type": "string",
-										"required": true
-									},
-									{ "slug": "highlighted", "label": "Highlight this plan", "type": "boolean" },
-									{
-										"slug": "badge",
-										"label": "Badge text, for example Most popular",
-										"type": "string"
-									}
-								]
-							}
-						},
-						{
-							"slug": "anchor_id",
-							"label": "Section ID (lowercase, for links like /#pricing)",
-							"type": "string",
-							"validation": { "pattern": "^(?:$|[a-z][a-z0-9_-]*)$" }
-						}
-					]
-				}
-			]
-		},
-		{
-			"slug": "marketing_faq",
-			"label": "FAQ",
-			"description": "A list of frequently asked questions",
-			"icon": "question",
-			"category": "Marketing",
-			"currentVersion": 1,
-			"versions": [
-				{
-					"version": 1,
-					"fields": [
-						{ "slug": "headline", "label": "Headline", "type": "string" },
-						{ "slug": "subheadline", "label": "Subheadline", "type": "text" },
-						{
-							"slug": "items",
-							"label": "Questions",
-							"type": "repeater",
-							"required": true,
-							"validation": {
-								"minItems": 1,
-								"maxItems": 12,
-								"subFields": [
-									{ "slug": "question", "label": "Question", "type": "string", "required": true },
-									{
-										"slug": "answer",
-										"label": "Answer (leave a blank line between paragraphs)",
-										"type": "text",
-										"required": true
-									}
-								]
-							}
-						},
-						{
-							"slug": "anchor_id",
-							"label": "Section ID (lowercase, for links like /#pricing)",
-							"type": "string",
-							"validation": { "pattern": "^(?:$|[a-z][a-z0-9_-]*)$" }
-						}
-					]
-				}
-			]
-		},
-		{
-			"slug": "marketing_logos",
-			"label": "Logo wall",
-			"description": "A scrolling row of customer or partner logos. Names without a logo show as text",
-			"icon": "buildings",
-			"category": "Marketing",
-			"currentVersion": 1,
-			"versions": [
-				{
-					"version": 1,
-					"fields": [
-						{
-							"slug": "headline",
-							"label": "Section label (small text above the logos)",
-							"type": "string"
-						},
-						{
-							"slug": "logos",
-							"label": "Logos",
-							"type": "repeater",
-							"required": true,
-							"validation": {
-								"minItems": 1,
-								"maxItems": 24,
-								"subFields": [
-									{ "slug": "name", "label": "Company name", "type": "string", "required": true },
-									{ "slug": "logo", "label": "Logo", "type": "image" }
-								]
-							}
-						},
-						{
-							"slug": "anchor_id",
-							"label": "Section ID (lowercase, for links like /#pricing)",
-							"type": "string",
-							"validation": { "pattern": "^(?:$|[a-z][a-z0-9_-]*)$" }
-						}
-					]
-				}
-			]
-		},
-		{
-			"slug": "marketing_split",
-			"label": "Text and image",
-			"description": "A headline, copy and checklist beside a photo",
-			"icon": "square-half",
-			"category": "Marketing",
-			"currentVersion": 1,
-			"versions": [
-				{
-					"version": 1,
-					"fields": [
-						{ "slug": "headline", "label": "Headline", "type": "string", "required": true },
-						{ "slug": "eyebrow", "label": "Label above headline", "type": "string" },
-						{
-							"slug": "body",
-							"label": "Body (leave a blank line between paragraphs)",
-							"type": "text"
-						},
-						{ "slug": "points", "label": "Checklist (one item per line)", "type": "text" },
-						{ "slug": "cta_label", "label": "Link text", "type": "string" },
-						{
-							"slug": "cta_url",
-							"label": "Link (starts with /, https://, mailto:, tel: or #)",
-							"type": "string",
-							"validation": { "pattern": "^(?:$|/(?!/|\\\\).*|(?:https?://|mailto:|tel:|#).+)$" }
-						},
-						{ "slug": "image", "label": "Image", "type": "image" },
-						{
-							"slug": "image_caption",
-							"label": "Image caption (shown on the photo)",
-							"type": "string"
-						},
-						{
-							"slug": "image_first",
-							"label": "Show the image first",
-							"type": "boolean",
-							"defaultValue": false
-						},
-						{
-							"slug": "anchor_id",
-							"label": "Section ID (lowercase, for links like /#pricing)",
-							"type": "string",
-							"validation": { "pattern": "^(?:$|[a-z][a-z0-9_-]*)$" }
-						}
-					]
-				}
-			]
-		},
-		{
-			"slug": "marketing_stats",
-			"label": "Stats",
-			"description": "Headline numbers on a dark panel",
-			"icon": "chart-bar",
-			"category": "Marketing",
-			"currentVersion": 1,
-			"versions": [
-				{
-					"version": 1,
-					"fields": [
-						{ "slug": "headline", "label": "Headline", "type": "string" },
-						{
-							"slug": "subheadline",
-							"label": "Second sentence (shown muted after the headline)",
-							"type": "text"
-						},
-						{
-							"slug": "stats",
-							"label": "Stats",
-							"type": "repeater",
-							"required": true,
-							"validation": {
-								"minItems": 1,
-								"maxItems": 6,
-								"subFields": [
-									{ "slug": "value", "label": "Value", "type": "string", "required": true },
-									{ "slug": "label", "label": "Label", "type": "string", "required": true }
-								]
-							}
-						},
-						{
-							"slug": "anchor_id",
-							"label": "Section ID (lowercase, for links like /#pricing)",
-							"type": "string",
-							"validation": { "pattern": "^(?:$|[a-z][a-z0-9_-]*)$" }
-						}
-					]
-				}
-			]
-		},
-		{
-			"slug": "marketing_cta",
-			"label": "Call to action",
-			"description": "A closing call to action over a photo or dark panel",
-			"icon": "cursor-click",
-			"category": "Marketing",
-			"currentVersion": 1,
-			"versions": [
-				{
-					"version": 1,
-					"fields": [
-						{ "slug": "headline", "label": "Headline", "type": "string", "required": true },
-						{
-							"slug": "body",
-							"label": "Body (leave a blank line between paragraphs)",
-							"type": "text"
-						},
-						{ "slug": "primary_cta_label", "label": "Primary button text", "type": "string" },
-						{
-							"slug": "primary_cta_url",
-							"label": "Primary button link (starts with /, https://, mailto:, tel: or #)",
-							"type": "string",
-							"validation": { "pattern": "^(?:$|/(?!/|\\\\).*|(?:https?://|mailto:|tel:|#).+)$" }
-						},
-						{ "slug": "secondary_cta_label", "label": "Secondary button text", "type": "string" },
-						{
-							"slug": "secondary_cta_url",
-							"label": "Secondary button link (starts with /, https://, mailto:, tel: or #)",
-							"type": "string",
-							"validation": { "pattern": "^(?:$|/(?!/|\\\\).*|(?:https?://|mailto:|tel:|#).+)$" }
-						},
-						{ "slug": "image", "label": "Background image", "type": "image" },
-						{
-							"slug": "anchor_id",
-							"label": "Section ID (lowercase, for links like /#pricing)",
-							"type": "string",
-							"validation": { "pattern": "^(?:$|[a-z][a-z0-9_-]*)$" }
-						}
-					]
-				}
-			]
-		},
-		{
-			"slug": "marketing_contact",
-			"label": "Contact options",
-			"description": "Cards that point readers to the right email address, phone number or page",
-			"icon": "address-book",
-			"category": "Marketing",
-			"currentVersion": 1,
-			"versions": [
-				{
-					"version": 1,
-					"fields": [
-						{ "slug": "headline", "label": "Headline", "type": "string" },
-						{ "slug": "eyebrow", "label": "Label above headline", "type": "string" },
-						{ "slug": "subheadline", "label": "Subheadline", "type": "text" },
-						{
-							"slug": "options",
-							"label": "Contact options",
-							"type": "repeater",
-							"required": true,
-							"validation": {
-								"minItems": 1,
-								"maxItems": 6,
-								"subFields": [
-									{
-										"slug": "icon",
-										"label": "Icon",
-										"type": "select",
-										"required": true,
-										"options": ["email", "support", "sales", "phone", "chat", "location"]
-									},
-									{ "slug": "title", "label": "Title", "type": "string", "required": true },
-									{
-										"slug": "description",
-										"label": "Description (leave a blank line between paragraphs)",
-										"type": "text"
-									},
-									{
-										"slug": "link_label",
-										"label": "Link text",
-										"type": "string",
-										"required": true
-									},
-									{
-										"slug": "link_url",
-										"label": "Link (starts with /, https://, mailto:, tel: or #)",
-										"type": "url",
-										"required": true
-									}
-								]
-							}
-						},
-						{
-							"slug": "anchor_id",
-							"label": "Section ID (lowercase, for links like /#pricing)",
-							"type": "string",
-							"validation": { "pattern": "^(?:$|[a-z][a-z0-9_-]*)$" }
-						}
-					]
-				}
-			]
-		},
-		{
-			"slug": "marketing_text",
-			"label": "Text",
-			"description": "Long-form text with headings, lists and links, for pages like About or Privacy",
-			"icon": "article",
-			"category": "Marketing",
-			"currentVersion": 1,
-			"versions": [
-				{
-					"version": 1,
-					"fields": [
-						{ "slug": "headline", "label": "Headline", "type": "string" },
-						{ "slug": "body", "label": "Body", "type": "portableText", "required": true },
-						{
-							"slug": "anchor_id",
-							"label": "Section ID (lowercase, for links like /#pricing)",
-							"type": "string",
-							"validation": { "pattern": "^(?:$|[a-z][a-z0-9_-]*)$" }
-						}
-					]
-				}
-			]
-		}
-	],
-	"collections": [
-		{
-			"slug": "pages",
-			"label": "Pages",
-			"labelSingular": "Page",
-			"urlPattern": "/{slug}",
-			"supports": ["drafts", "revisions", "preview", "seo"],
-			"fields": [
-				{
-					"slug": "title",
-					"label": "Title",
-					"type": "string",
-					"required": true
-				},
-				{
-					"slug": "content",
-					"label": "Content",
-					"type": "blocks",
-					"validation": {
-						"allowedTypes": [
-							"marketing_hero",
-							"marketing_features",
-							"marketing_testimonials",
-							"marketing_pricing",
-							"marketing_faq",
-							"marketing_logos",
-							"marketing_split",
-							"marketing_stats",
-							"marketing_cta",
-							"marketing_contact",
-							"marketing_text"
-						],
-						"maxItems": 20
-					}
-				}
-			]
-		}
-	],
-	"menus": [
-		{
-			"name": "primary",
-			"label": "Primary Navigation",
-			"items": [
-				{
-					"type": "custom",
-					"label": "Platform",
-					"url": "/#platform"
-				},
-				{
-					"type": "custom",
-					"label": "Monitoring",
-					"url": "/#monitoring"
-				},
-				{
-					"type": "custom",
-					"label": "Customers",
-					"url": "/#customers"
-				},
-				{
-					"type": "custom",
-					"label": "Pricing",
-					"url": "/pricing"
-				},
-				{
-					"type": "custom",
-					"label": "Contact",
-					"url": "/contact"
-				},
-				{
-					"type": "custom",
-					"label": "Book a demo",
-					"url": "/contact",
-					"cssClasses": "button"
-				}
-			]
-		},
-		{
-			"name": "footer_product",
-			"label": "Product",
-			"items": [
-				{ "type": "custom", "label": "Platform", "url": "/#platform" },
-				{ "type": "custom", "label": "Monitoring", "url": "/#monitoring" },
-				{ "type": "custom", "label": "Planning", "url": "/#planning" },
-				{ "type": "custom", "label": "Pricing", "url": "/pricing" }
-			]
-		},
-		{
-			"name": "footer_company",
-			"label": "Company",
-			"items": [
-				{ "type": "custom", "label": "Customers", "url": "/#customers" },
-				{ "type": "custom", "label": "FAQ", "url": "/#faq" },
-				{ "type": "custom", "label": "Contact", "url": "/contact" }
-			]
-		},
-		{
-			"name": "footer_support",
-			"label": "Support",
-			"items": [
-				{ "type": "custom", "label": "Talk to sales", "url": "mailto:sales@halden.example" },
-				{ "type": "custom", "label": "Support", "url": "mailto:support@halden.example" },
-				{ "type": "custom", "label": "Email us", "url": "mailto:hello@halden.example" }
-			]
-		}
-	],
-	"content": {
-		"pages": [
-			{
-				"id": "home",
-				"slug": "home",
-				"status": "published",
-				"data": {
-					"title": "Home",
-					"content": [
-						{
-							"_type": "marketing_hero",
-							"_version": 1,
-							"_key": "hero",
-							"eyebrow": "New: automated CSRD and GRESB reporting",
-							"eyebrow_url": "/#planning",
-							"headline": "Every building, running at its best.",
-							"subheadline": "Halden connects to the meters and systems you already have, finds the waste, and fixes it automatically, across one building or ten thousand.",
-							"primary_cta_label": "Book a demo",
-							"primary_cta_url": "/contact",
-							"secondary_cta_label": "See how it works",
-							"secondary_cta_url": "/#platform",
-							"image": {
-								"$media": {
-									"url": "https://images.unsplash.com/photo-1476889833843-503f40e367a0?w=2400&h=1350&fit=crop&q=80&fm=jpg",
-									"alt": "Concrete atrium with round skylights, seen from below",
-									"filename": "halden-atrium.jpg"
-								}
-							},
-							"image_caption": "Riverside Tower · 18% below its 2024 energy baseline"
-						},
-						{
-							"_type": "marketing_logos",
-							"_version": 1,
-							"_key": "logos",
-							"headline": "Trusted by property, hospitality and campus teams",
-							"logos": [
-								{ "name": "Oakline" },
-								{ "name": "Arden Hotels" },
-								{ "name": "Calder" },
-								{ "name": "Westmere" },
-								{ "name": "Kestrel" },
-								{ "name": "Northfield" }
-							]
-						},
-						{
-							"_type": "marketing_features",
-							"_version": 1,
-							"_key": "platform",
-							"anchor_id": "platform",
-							"eyebrow": "Platform",
-							"headline": "One platform for every building.",
-							"subheadline": "Meters, controls and reports, finally in one place.",
-							"features": [
-								{
-									"icon": "gauge",
-									"title": "Every meter, one view",
-									"description": "Electricity, gas, water and heat from every site, normalised and live."
-								},
-								{
-									"icon": "zap",
-									"title": "Fixes that run themselves",
-									"description": "When a building drifts, Halden adjusts schedules and setpoints, then shows what it saved."
-								},
-								{
-									"icon": "file",
-									"title": "Reports in minutes",
-									"description": "CSRD, GRESB and ENERGY STAR submissions from the same data, ready for your auditor."
-								},
-								{
-									"icon": "chart",
-									"title": "Benchmarks that mean something",
-									"description": "Compare buildings by type, climate and occupancy, not just floor area."
-								},
-								{
-									"icon": "plug",
-									"title": "Works with what you have",
-									"description": "Connects to your existing BMS, meters and utility accounts. No rip and replace."
-								},
-								{
-									"icon": "trend",
-									"title": "Budgets you can trust",
-									"description": "Forecast spend and carbon a year ahead, with weather and tariffs built in."
-								}
-							]
-						},
-						{
-							"_type": "marketing_split",
-							"_version": 1,
-							"_key": "monitoring",
-							"anchor_id": "monitoring",
-							"eyebrow": "Monitoring",
-							"headline": "See every kilowatt, room by room.",
-							"body": "Halden reads your meters every fifteen minutes and learns how each building should behave. When a chiller runs overnight or a floor heats an empty office, you know before the bill does.",
-							"points": "Live data from 400+ meter and BMS integrations\nAlerts ranked by cost, not by noise\nEvery fix logged with the saving it made",
-							"cta_label": "Book a walkthrough",
-							"cta_url": "/contact",
-							"image": {
-								"$media": {
-									"url": "https://images.unsplash.com/photo-1504297050568-910d24c426d3?w=1200&h=1500&fit=crop&q=80&fm=jpg",
-									"alt": "Office corridor with glass walls and concrete columns",
-									"filename": "halden-corridor.jpg"
-								}
-							},
-							"image_caption": "Floor 3 · 21.4 °C · CO₂ 612 ppm"
-						},
-						{
-							"_type": "marketing_split",
-							"_version": 1,
-							"_key": "planning",
-							"anchor_id": "planning",
-							"eyebrow": "Planning",
-							"headline": "Plan the path to net zero.",
-							"body": "Model retrofits, solar and electrification against how your buildings really run, then track every project against the plan.",
-							"points": "Scenario plans for every building\nPayback and carbon side by side\nBoard-ready progress reports",
-							"cta_label": "See pricing",
-							"cta_url": "/pricing",
-							"image": {
-								"$media": {
-									"url": "https://images.unsplash.com/photo-1694327671725-e2a81cda3436?w=1200&h=1500&fit=crop&q=80&fm=jpg",
-									"alt": "Rows of solar panels on a roof in warm light",
-									"filename": "halden-solar.jpg"
-								}
-							},
-							"image_caption": "Rooftop solar · 312 MWh generated this year",
-							"image_first": true
-						},
-						{
-							"_type": "marketing_stats",
-							"_version": 1,
-							"_key": "results",
-							"headline": "What customers see in their first year.",
-							"subheadline": "Measured across 4,800 connected buildings.",
-							"stats": [
-								{ "value": "23%", "label": "Lower energy spend, on average" },
-								{ "value": "4,800", "label": "Buildings connected across 14 countries" },
-								{ "value": "9 mo", "label": "Average payback period" },
-								{ "value": "99.98%", "label": "Data uptime over the last 12 months" }
-							]
-						},
-						{
-							"_type": "marketing_testimonials",
-							"_version": 1,
-							"_key": "customers",
-							"anchor_id": "customers",
-							"headline": "Customers",
-							"testimonials": [
-								{
-									"quote": "We found more savings in the first month than in five years of energy audits. Halden paid for itself before the first invoice was due.",
-									"author": "Maya Okafor",
-									"role": "Director of Facilities",
-									"company": "Calder University"
-								},
-								{
-									"quote": "Our GRESB submission used to take a quarter. Now it is a week of review, and the numbers hold up.",
-									"author": "Daniel Reyes",
-									"role": "Head of Sustainability",
-									"company": "Oakline"
-								},
-								{
-									"quote": "Guests never notice, which is the point. Our hotels use 19% less energy and nobody had to change how they work.",
-									"author": "Priya Nair",
-									"role": "VP Operations",
-									"company": "Arden Hotels"
-								}
-							]
-						},
-						{
-							"_type": "marketing_faq",
-							"_version": 1,
-							"_key": "faq",
-							"anchor_id": "faq",
-							"headline": "Questions, answered.",
-							"subheadline": "Something else on your mind? Our building engineers reply within one working day.",
-							"items": [
-								{
-									"question": "Do we need new hardware?",
-									"answer": "Usually not. Halden connects to the meters, building management systems and utility accounts you already have. Where a site has no metering, we ship clip-on sensors that take an hour to fit."
-								},
-								{
-									"question": "How quickly will we see savings?",
-									"answer": "Most teams act on their first findings within two weeks of connecting a building. The early fixes are usually schedule and setpoint changes, such as plant that runs overnight or heating in empty rooms. The savings report at day 30 measures each change against the building's own baseline."
-								},
-								{
-									"question": "Which reporting frameworks do you support?",
-									"answer": "Halden prepares CSRD, GRESB, ENERGY STAR, SECR and NABERS reports from the same metered data, so the figures agree across every submission. Your auditor can have read-only access to the readings behind each number."
-								},
-								{
-									"question": "Is our data secure?",
-									"answer": "Halden is audited every year against SOC 2 Type II and certified to ISO 27001. You choose EU or US hosting, and your meter data is encrypted in transit and at rest."
-								},
-								{
-									"question": "Can Halden change settings on its own?",
-									"answer": "Only inside limits you set, such as comfort bands, occupancy hours and equipment you mark as off limits. Every change is logged with the reason it was made, and anyone on your team can roll it back."
-								}
-							]
-						},
-						{
-							"_type": "marketing_cta",
-							"_version": 1,
-							"_key": "cta",
-							"headline": "See what your buildings could save.",
-							"body": "Book a 30-minute walkthrough with a building engineer. Bring a utility bill and we will bring the numbers.",
-							"primary_cta_label": "Book a demo",
-							"primary_cta_url": "/contact",
-							"secondary_cta_label": "Talk to sales",
-							"secondary_cta_url": "mailto:sales@halden.example",
-							"image": {
-								"$media": {
-									"url": "https://images.unsplash.com/photo-1674763973434-75e1930d4959?w=2400&h=1350&fit=crop&q=80&fm=jpg",
-									"alt": "Timber-lined atrium opening to the sky",
-									"filename": "halden-timber-atrium.jpg"
-								}
-							}
-						}
-					]
-				}
-			},
-			{
-				"id": "pricing",
-				"slug": "pricing",
-				"status": "published",
-				"data": {
-					"title": "Pricing",
-					"content": [
-						{
-							"_type": "marketing_hero",
-							"_version": 1,
-							"_key": "pricing-hero",
-							"headline": "Pricing that pays for itself.",
-							"subheadline": "Start with one building for free. Every plan includes onboarding, live metering and support from energy engineers.",
-							"centered": true
-						},
-						{
-							"_type": "marketing_pricing",
-							"_version": 1,
-							"_key": "pricing-plans",
-							"plans": [
-								{
-									"name": "Pilot",
-									"price": "Free",
-									"period": "for 30 days",
-									"description": "Prove the savings on one building before you commit.",
-									"features": "1 building\nLive metering and fault detection\nSavings report at day 30\nEmail support",
-									"cta_label": "Start a pilot",
-									"cta_url": "/contact"
-								},
-								{
-									"name": "Portfolio",
-									"price": "$149",
-									"period": "/building/month",
-									"description": "For owners and operators running 5 to 500 buildings.",
-									"features": "Unlimited buildings and users\nAutomated BMS control\nCSRD, GRESB and ENERGY STAR reporting\nPortfolio benchmarking\nA dedicated energy engineer",
-									"cta_label": "Book a demo",
-									"cta_url": "/contact",
-									"highlighted": true,
-									"badge": "Most popular"
-								},
-								{
-									"name": "Enterprise",
-									"price": "Custom",
-									"description": "For global portfolios with custom integration and security needs.",
-									"features": "Everything in Portfolio\nSSO, SCIM and audit logs\nEU or US data residency\nCustom integrations and API access\n99.9% uptime SLA",
-									"cta_label": "Talk to sales",
-									"cta_url": "mailto:sales@halden.example"
-								}
-							]
-						},
-						{
-							"_type": "marketing_faq",
-							"_version": 1,
-							"_key": "pricing-faq",
-							"headline": "Pricing questions.",
-							"subheadline": "Still deciding? Talk to an energy engineer before you start a pilot.",
-							"items": [
-								{
-									"question": "What counts as a building?",
-									"answer": "Any site with its own utility meter or building management system, from a 40-storey office tower to a single retail unit. Several buildings on one shared meter count as one until you add sub-meters to measure them separately."
-								},
-								{
-									"question": "Are there setup fees?",
-									"answer": "No. Every plan, including the pilot, covers onboarding, connecting your meters and building systems, and training for your team. Clip-on sensors for unmetered sites are supplied at cost."
-								},
-								{
-									"question": "Is there a discount for annual billing?",
-									"answer": "Yes. Annual billing takes 15% off the Portfolio price and is invoiced on NET 30 terms. You can move from monthly to annual billing at any time."
-								},
-								{
-									"question": "What happens after the pilot?",
-									"answer": "On day 30 you receive a savings report for the pilot building. Move to the Portfolio plan to keep its data, alerts and automations running, or stop there and we delete the data within 30 days."
-								}
-							]
-						},
-						{
-							"_type": "marketing_cta",
-							"_version": 1,
-							"_key": "pricing-cta",
-							"headline": "Start with one building.",
-							"body": "Connect a site in an afternoon and see your first savings report in 30 days.",
-							"primary_cta_label": "Start a pilot",
-							"primary_cta_url": "/contact",
-							"secondary_cta_label": "Talk to sales",
-							"secondary_cta_url": "mailto:sales@halden.example"
-						}
-					]
-				}
-			},
-			{
-				"id": "contact",
-				"slug": "contact",
-				"status": "published",
-				"data": {
-					"title": "Contact",
-					"content": [
-						{
-							"_type": "marketing_hero",
-							"_version": 1,
-							"_key": "contact-hero",
-							"headline": "Talk to the Halden team",
-							"subheadline": "Questions, a demo, or a building you want us to look at? Email the team that can help and include any useful context. We reply within one working day.",
-							"centered": true
-						},
-						{
-							"_type": "marketing_contact",
-							"_version": 1,
-							"_key": "contact-options",
-							"options": [
-								{
-									"icon": "email",
-									"title": "General questions",
-									"description": "Ask about Halden, partnerships, press, or a building you’d like us to look at.",
-									"link_label": "hello@halden.example",
-									"link_url": "mailto:hello@halden.example"
-								},
-								{
-									"icon": "support",
-									"title": "Customer support",
-									"description": "Get help with your account, a meter integration, or a building that’s already connected.",
-									"link_label": "support@halden.example",
-									"link_url": "mailto:support@halden.example"
-								},
-								{
-									"icon": "sales",
-									"title": "Sales",
-									"description": "Talk through pricing, a pilot, procurement or a security review for your portfolio.",
-									"link_label": "sales@halden.example",
-									"link_url": "mailto:sales@halden.example"
-								}
-							]
-						}
-					]
-				}
-			}
-		]
-	}
+  "$schema": "https://emdashcms.com/seed.schema.json",
+  "version": "1",
+  "defaultLocale": "en",
+  "meta": {
+    "name": "Indian Dental Clinic v2.0 (Marketing Blocks)",
+    "description": "Agency-ready Indian dental website seed with modular marketing blocks, 8 line-art icon treatments, symptom matcher, E-E-A-T doctor bylines, and WhatsApp/Call conversion flows.",
+    "author": "Dental Agency Starter"
+  },
+  "settings": {
+    "title": "[Clinic Name]",
+    "tagline": "Calm, Pain-Free Dental Care in [Area], [City]",
+    "timezone": "Asia/Kolkata",
+    "dateFormat": "d MMMM yyyy",
+    "postsPerPage": 12
+  },
+  "blockTypes": [
+    {
+      "slug": "dental_hero",
+      "label": "Dental Hero (WhatsApp + Call + Book)",
+      "category": "Hero",
+      "currentVersion": 1,
+      "versions": [
+        {
+          "version": 1,
+          "fields": [
+            {
+              "slug": "badge",
+              "label": "Trust Badge",
+              "type": "string"
+            },
+            {
+              "slug": "heading",
+              "label": "Headline",
+              "type": "string",
+              "required": true
+            },
+            {
+              "slug": "subcopy",
+              "label": "Subheading",
+              "type": "text"
+            },
+            {
+              "slug": "primaryCtaLabel",
+              "label": "Primary CTA Label",
+              "type": "string"
+            },
+            {
+              "slug": "primaryCtaUrl",
+              "label": "Primary CTA URL",
+              "type": "string"
+            },
+            {
+              "slug": "whatsappNumber",
+              "label": "WhatsApp Number (91XXXXXXXXXX)",
+              "type": "string"
+            },
+            {
+              "slug": "phoneNumber",
+              "label": "Phone Number (+91-XXXXXXXXXX)",
+              "type": "string"
+            },
+            {
+              "slug": "hoursText",
+              "label": "Clinic Hours",
+              "type": "string"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "treatment_icon_grid",
+      "label": "8-Treatment Line-Art Icon Grid",
+      "category": "Services",
+      "currentVersion": 1,
+      "versions": [
+        {
+          "version": 1,
+          "fields": [
+            {
+              "slug": "eyebrow",
+              "label": "Eyebrow",
+              "type": "string"
+            },
+            {
+              "slug": "heading",
+              "label": "Section Heading",
+              "type": "string",
+              "required": true
+            },
+            {
+              "slug": "ctaLabel",
+              "label": "Hub Link Label",
+              "type": "string"
+            },
+            {
+              "slug": "ctaUrl",
+              "label": "Hub Link URL",
+              "type": "string"
+            },
+            {
+              "slug": "columnsDesktop",
+              "label": "Desktop Columns",
+              "type": "integer",
+              "defaultValue": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "doctor_trust_snapshot",
+      "label": "Doctor & Sterilization Snapshot",
+      "category": "Trust",
+      "currentVersion": 1,
+      "versions": [
+        {
+          "version": 1,
+          "fields": [
+            {
+              "slug": "eyebrow",
+              "label": "Eyebrow",
+              "type": "string"
+            },
+            {
+              "slug": "heading",
+              "label": "Heading",
+              "type": "string",
+              "required": true
+            },
+            {
+              "slug": "body",
+              "label": "Description",
+              "type": "text"
+            },
+            {
+              "slug": "doctorName",
+              "label": "Lead Dentist",
+              "type": "string"
+            },
+            {
+              "slug": "regNumber",
+              "label": "Dental Council Reg #",
+              "type": "string"
+            },
+            {
+              "slug": "ctaLabel",
+              "label": "Button Label",
+              "type": "string"
+            },
+            {
+              "slug": "ctaUrl",
+              "label": "Button URL",
+              "type": "string"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "symptom_matcher",
+      "label": "Interactive Pain & Symptom Matcher",
+      "category": "Interactive",
+      "currentVersion": 1,
+      "versions": [
+        {
+          "version": 1,
+          "fields": [
+            {
+              "slug": "heading",
+              "label": "Heading",
+              "type": "string",
+              "required": true
+            },
+            {
+              "slug": "subcopy",
+              "label": "Helper Text",
+              "type": "text"
+            },
+            {
+              "slug": "enableSearch",
+              "label": "Enable Plain-English Search",
+              "type": "boolean",
+              "defaultValue": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "faq_accordion",
+      "label": "FAQ Accordion (FAQPage Schema)",
+      "category": "SEO",
+      "currentVersion": 1,
+      "versions": [
+        {
+          "version": 1,
+          "fields": [
+            {
+              "slug": "heading",
+              "label": "Heading",
+              "type": "string",
+              "required": true
+            },
+            {
+              "slug": "items",
+              "label": "FAQ Items",
+              "type": "repeater",
+              "validation": {
+                "subFields": [
+                  {
+                    "slug": "question",
+                    "label": "Question",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "slug": "answer",
+                    "label": "Answer",
+                    "type": "text",
+                    "required": true
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "clinic_location_cta",
+      "label": "Local Area, Map & Contact Block",
+      "category": "Conversion",
+      "currentVersion": 1,
+      "versions": [
+        {
+          "version": 1,
+          "fields": [
+            {
+              "slug": "heading",
+              "label": "Heading",
+              "type": "string",
+              "required": true
+            },
+            {
+              "slug": "address",
+              "label": "Clinic Address",
+              "type": "text"
+            },
+            {
+              "slug": "landmark",
+              "label": "Nearby Landmark",
+              "type": "string"
+            },
+            {
+              "slug": "areasServed",
+              "label": "Neighborhoods Served",
+              "type": "string"
+            },
+            {
+              "slug": "hours",
+              "label": "Working Hours",
+              "type": "string"
+            },
+            {
+              "slug": "phone",
+              "label": "Phone / WhatsApp",
+              "type": "string"
+            },
+            {
+              "slug": "email",
+              "label": "Email",
+              "type": "string"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "appointment_widget",
+      "label": "3-Step Slot Request & Priority Pain Widget",
+      "category": "Interactive",
+      "currentVersion": 1,
+      "versions": [
+        {
+          "version": 1,
+          "fields": [
+            {
+              "slug": "heading",
+              "label": "Heading",
+              "type": "string",
+              "required": true
+            },
+            {
+              "slug": "confirmationNote",
+              "label": "Desk Confirmation Note",
+              "type": "text"
+            },
+            {
+              "slug": "whatsappNumber",
+              "label": "WhatsApp Fallback Number",
+              "type": "string"
+            },
+            {
+              "slug": "enablePrioritySlot",
+              "label": "Enable Urgent / Priority Pain Option",
+              "type": "boolean",
+              "defaultValue": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "rich_content_section",
+      "label": "Editorial Content & Process Section",
+      "category": "Content",
+      "currentVersion": 1,
+      "versions": [
+        {
+          "version": 1,
+          "fields": [
+            {
+              "slug": "eyebrow",
+              "label": "Eyebrow",
+              "type": "string"
+            },
+            {
+              "slug": "heading",
+              "label": "Heading",
+              "type": "string",
+              "required": true
+            },
+            {
+              "slug": "body",
+              "label": "Body Text",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "collections": [
+    {
+      "slug": "pages",
+      "label": "Pages",
+      "labelSingular": "Page",
+      "description": "Modular marketing pages (Home, About, Treatment Hub, Contact, Book Appointment)",
+      "supports": [
+        "drafts",
+        "revisions",
+        "search",
+        "seo"
+      ],
+      "urlPattern": "/{slug}",
+      "routable": true,
+      "titleField": "title",
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Title",
+          "type": "string",
+          "required": true,
+          "searchable": true
+        },
+        {
+          "slug": "excerpt",
+          "label": "Meta Description / Excerpt",
+          "type": "text"
+        },
+        {
+          "slug": "content",
+          "label": "Page Blocks",
+          "type": "blocks",
+          "validation": {
+            "allowedTypes": [
+              "dental_hero",
+              "treatment_icon_grid",
+              "doctor_trust_snapshot",
+              "symptom_matcher",
+              "faq_accordion",
+              "clinic_location_cta",
+              "appointment_widget",
+              "rich_content_section"
+            ],
+            "maxItems": 20
+          }
+        }
+      ]
+    },
+    {
+      "slug": "treatments",
+      "label": "Treatments",
+      "labelSingular": "Treatment",
+      "description": "Patient-intent dedicated dental treatment pages with icons, symptoms, comparison tables, care tabs, and FAQs",
+      "supports": [
+        "drafts",
+        "revisions",
+        "search",
+        "seo"
+      ],
+      "urlPattern": "/treatments/{slug}",
+      "routable": true,
+      "titleField": "title",
+      "admin": {
+        "listColumns": [
+          "icon_key",
+          "duration",
+          "visits"
+        ]
+      },
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Treatment Name",
+          "type": "string",
+          "required": true,
+          "searchable": true
+        },
+        {
+          "slug": "headline",
+          "label": "Problem-First H1 Headline",
+          "type": "string",
+          "required": true
+        },
+        {
+          "slug": "excerpt",
+          "label": "Short Card Summary & Meta Description",
+          "type": "text",
+          "required": true
+        },
+        {
+          "slug": "icon_key",
+          "label": "Line-Art SVG Icon Key",
+          "type": "select",
+          "validation": {
+            "options": [
+              "root-canal",
+              "implants",
+              "aligners",
+              "whitening",
+              "checkup",
+              "pediatric",
+              "crowns",
+              "gums"
+            ]
+          }
+        },
+        {
+          "slug": "duration",
+          "label": "Chair Time",
+          "type": "string"
+        },
+        {
+          "slug": "visits",
+          "label": "Visits Needed",
+          "type": "string"
+        },
+        {
+          "slug": "comfort_note",
+          "label": "Comfort / Anesthesia",
+          "type": "string"
+        },
+        {
+          "slug": "symptoms_json",
+          "label": "Interactive Symptom Checklist (JSON)",
+          "type": "json"
+        },
+        {
+          "slug": "why_matters",
+          "label": "Why Timely Care Matters",
+          "type": "text"
+        },
+        {
+          "slug": "comparison_json",
+          "label": "Options Comparison Table (JSON)",
+          "type": "json"
+        },
+        {
+          "slug": "steps_json",
+          "label": "Step-by-Step Procedure Timeline (JSON)",
+          "type": "json"
+        },
+        {
+          "slug": "care_tabs_json",
+          "label": "Before / During / After Care Tabs (JSON)",
+          "type": "json"
+        },
+        {
+          "slug": "plan_factors_json",
+          "label": "What Decides Your Plan (JSON)",
+          "type": "json"
+        },
+        {
+          "slug": "clinical_note",
+          "label": "Doctor's Clinical Note (E-E-A-T)",
+          "type": "text"
+        },
+        {
+          "slug": "faqs_json",
+          "label": "Procedure FAQs (JSON)",
+          "type": "json"
+        }
+      ]
+    }
+  ],
+  "taxonomies": [
+    {
+      "name": "treatment_category",
+      "label": "Treatment Categories",
+      "labelSingular": "Treatment Category",
+      "hierarchical": false,
+      "collections": [
+        "treatments"
+      ],
+      "terms": [
+        {
+          "slug": "restorative",
+          "label": "Restorative"
+        },
+        {
+          "slug": "cosmetic",
+          "label": "Cosmetic"
+        },
+        {
+          "slug": "orthodontics",
+          "label": "Orthodontics"
+        },
+        {
+          "slug": "preventive",
+          "label": "Preventive"
+        },
+        {
+          "slug": "pediatric",
+          "label": "Pediatric"
+        }
+      ]
+    }
+  ],
+  "bylines": [
+    {
+      "id": "byline-lead-dentist",
+      "slug": "lead-dentist",
+      "displayName": "[Dr. Full Name, BDS, MDS]",
+      "bio": "Founder & Chief Dentist at [Clinic Name] ([State Dental Council Reg. #XXXXX]) with [12+ Years] of clinical experience in gentle, ethical dental care.",
+      "isGuest": true
+    }
+  ],
+  "content": {
+    "pages": [
+      {
+        "id": "page-home",
+        "slug": "home",
+        "status": "published",
+        "data": {
+          "title": "[Clinic Name] — Calm, Pain-Free Dental Care in [Area], [City]",
+          "excerpt": "Honest diagnosis, gentle hands, and modern digital dentistry at [Clinic Name] in [Area], [City]. Book online or WhatsApp [+91-XXXXXXXXXX].",
+          "content": [
+            {
+              "_type": "dental_hero",
+              "_version": 1,
+              "_key": "home-hero-1",
+              "badge": "★ 4.9/5 Google Rated • [Area], [City]",
+              "heading": "Calm, Pain-Free Dental Care for Your Entire Family",
+              "subcopy": "Ethical diagnosis, gentle procedures, and modern digital dentistry at [Clinic Name]—explained clearly on screen before any treatment starts.",
+              "primaryCtaLabel": "Book Appointment →",
+              "primaryCtaUrl": "/book-appointment",
+              "whatsappNumber": "91XXXXXXXXXX",
+              "phoneNumber": "+91-XXXXXXXXXX",
+              "hoursText": "Mon–Sat: 9:30 AM – 8:00 PM | Sun: By Appointment"
+            },
+            {
+              "_type": "treatment_icon_grid",
+              "_version": 1,
+              "_key": "home-treatments-2",
+              "eyebrow": "Treatments",
+              "heading": "Complete Dental Care Under One Roof",
+              "ctaLabel": "Not sure? Search by Pain / Symptom →",
+              "ctaUrl": "/treatments",
+              "columnsDesktop": 4
+            },
+            {
+              "_type": "doctor_trust_snapshot",
+              "_version": 1,
+              "_key": "home-doctor-3",
+              "eyebrow": "Meet Your Dentist",
+              "heading": "Honest Diagnosis. Gentle Hands. Clear Plans.",
+              "body": "Led by [Dr. Full Name, BDS, MDS] ([12+ Years Experience]), [Clinic Name] uses low-radiation digital X-rays and strict 7-step Class-B autoclave sterilization so you always know what is happening and why.",
+              "doctorName": "[Dr. Full Name, BDS, MDS]",
+              "regNumber": "[State Dental Council Reg. #XXXXX]",
+              "ctaLabel": "Meet the Team & Tour Clinic →",
+              "ctaUrl": "/about"
+            },
+            {
+              "_type": "clinic_location_cta",
+              "_version": 1,
+              "_key": "home-location-4",
+              "heading": "Easy to Reach in [Area], [City]",
+              "address": "[Street Address, Area, City, State, PIN]",
+              "landmark": "[Near Major Landmark]",
+              "areasServed": "[Area], [Nearby Area 1], [Nearby Area 2], [Nearby Area 3]",
+              "hours": "Mon–Sat: 9:30 AM – 8:00 PM | Sun: By Appointment",
+              "phone": "+91-XXXXXXXXXX",
+              "email": "[appointments@clinicname.com]"
+            },
+            {
+              "_type": "faq_accordion",
+              "_version": 1,
+              "_key": "home-faq-5",
+              "heading": "Common Questions Before Your Visit",
+              "items": [
+                {
+                  "question": "How do I book an appointment or ask a quick question?",
+                  "answer": "Request a slot online in 60 seconds, call [+91-XXXXXXXXXX], or message us on WhatsApp for same-day availability."
+                },
+                {
+                  "question": "Do you handle urgent toothache or emergency visits?",
+                  "answer": "Yes. We reserve daily priority slots for sudden tooth pain, swelling, or broken teeth. Call or WhatsApp our desk for priority scheduling."
+                },
+                {
+                  "question": "Will the dentist explain the full treatment plan before starting?",
+                  "answer": "Always. After examining your teeth and X-rays, we explain every option, timeline, and exact cost clearly before any procedure begins."
+                },
+                {
+                  "question": "How do you maintain hygiene and sterilization?",
+                  "answer": "Every instrument goes through a 7-step Class-B vacuum autoclave sterilization cycle and is opened in a sealed pouch in front of you."
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "page-about",
+        "slug": "about",
+        "status": "published",
+        "data": {
+          "title": "About [Clinic Name] & [Dr. Full Name]",
+          "excerpt": "Meet [Dr. Full Name] and our specialist dental team at [Clinic Name] in [Area], [City]. Strict Class-B sterilization, digital X-rays, and fear-free care.",
+          "content": [
+            {
+              "_type": "rich_content_section",
+              "_version": 1,
+              "_key": "about-story-1",
+              "eyebrow": "About [Clinic Name]",
+              "heading": "Gentle, Ethical Dentistry Built Around Patient Comfort",
+              "body": "Founded in [Year], [Clinic Name] was created so families, children, and anxious patients in [Area], [City] receive clear, unhurried dental care without fear or pressure."
+            },
+            {
+              "_type": "doctor_trust_snapshot",
+              "_version": 1,
+              "_key": "about-lead-2",
+              "eyebrow": "Founder & Chief Dentist",
+              "heading": "[Dr. Full Name, BDS, MDS]",
+              "body": "Focused on conservative, pain-free dentistry—showing X-rays on screen and ensuring every patient understands their options before any procedure begins.",
+              "doctorName": "[Dr. Full Name, BDS, MDS]",
+              "regNumber": "[State Dental Council Reg. #XXXXX]",
+              "ctaLabel": "Book Consultation →",
+              "ctaUrl": "/book-appointment"
+            }
+          ]
+        }
+      },
+      {
+        "id": "page-treatments",
+        "slug": "treatments",
+        "status": "published",
+        "data": {
+          "title": "Dental Treatments & Symptom Finder",
+          "excerpt": "Browse all 8 core dental treatments at [Clinic Name] or search by plain-English pain symptoms.",
+          "content": [
+            {
+              "_type": "symptom_matcher",
+              "_version": 1,
+              "_key": "hub-symptom-1",
+              "heading": "Dental Treatments & Symptom Finder",
+              "subcopy": "Type what you are feeling—such as 'cold water pain', 'swollen gum', or 'missing tooth'—or filter by treatment category.",
+              "enableSearch": true
+            },
+            {
+              "_type": "treatment_icon_grid",
+              "_version": 1,
+              "_key": "hub-grid-2",
+              "eyebrow": "All 8 Core Treatments",
+              "heading": "Explore Detailed Patient Guides",
+              "ctaLabel": "Book General Checkup →",
+              "ctaUrl": "/book-appointment",
+              "columnsDesktop": 4
+            }
+          ]
+        }
+      },
+      {
+        "id": "page-contact",
+        "slug": "contact",
+        "status": "published",
+        "data": {
+          "title": "Contact & Visit [Clinic Name]",
+          "excerpt": "Visit [Clinic Name] near [Near Major Landmark] in [Area], [City]. Call or WhatsApp [+91-XXXXXXXXXX].",
+          "content": [
+            {
+              "_type": "clinic_location_cta",
+              "_version": 1,
+              "_key": "contact-loc-1",
+              "heading": "Contact & Visit [Clinic Name]",
+              "address": "[Street Address, Area, City, State, PIN]",
+              "landmark": "[Near Major Landmark]",
+              "areasServed": "[Area], [Nearby Area 1], [Nearby Area 2]",
+              "hours": "Mon–Sat: 9:30 AM – 8:00 PM | Sun: By Appointment",
+              "phone": "+91-XXXXXXXXXX",
+              "email": "[appointments@clinicname.com]"
+            }
+          ]
+        }
+      },
+      {
+        "id": "page-appointment",
+        "slug": "book-appointment",
+        "status": "published",
+        "data": {
+          "title": "Book Dental Appointment",
+          "excerpt": "Request your preferred dental slot at [Clinic Name] in [Area], [City]. Fast WhatsApp confirmation from our front desk.",
+          "content": [
+            {
+              "_type": "appointment_widget",
+              "_version": 1,
+              "_key": "appt-widget-1",
+              "heading": "Request Your Preferred Dental Slot",
+              "confirmationNote": "Our front desk checks live chair availability and confirms your exact slot on WhatsApp within 15 minutes during clinic hours.",
+              "whatsappNumber": "91XXXXXXXXXX",
+              "enablePrioritySlot": true
+            }
+          ]
+        }
+      }
+    ],
+    "treatments": [
+      {
+        "id": "treatment-root-canal",
+        "slug": "root-canal-treatment",
+        "status": "published",
+        "taxonomies": {
+          "treatment_category": [
+            "restorative"
+          ]
+        },
+        "bylines": [
+          {
+            "byline": "byline-lead-dentist",
+            "roleLabel": "Clinically Reviewed By"
+          }
+        ],
+        "data": {
+          "title": "Root Canal Treatment",
+          "headline": "Stop Toothache & Save Your Natural Tooth — Painless Root Canal Treatment",
+          "excerpt": "Gentle rotary root canal therapy to clear deep nerve infection, stop throbbing pain, and save your natural tooth.",
+          "icon_key": "root-canal",
+          "duration": "45–60 Mins",
+          "visits": "1–2 Visits (Single-Sitting Option)",
+          "comfort_note": "Buffered Local Anesthesia",
+          "symptoms_json": [
+            "Throbbing toothache that worsens at night",
+            "Lingering pain after hot tea/coffee or cold water",
+            "Sharp pain when biting or chewing food",
+            "Swollen gum or small pimple-like bump near a tooth",
+            "Deep black cavity or cracked tooth",
+            "Tooth darkening after an old injury"
+          ],
+          "why_matters": "When tooth decay or a crack reaches the inner nerve (pulp), painkillers only mask the ache temporarily. Cleaning and sealing the infected root removes the source of pain, stops infection from spreading to the jawbone, and avoids tooth extraction.",
+          "comparison_json": [
+            {
+              "option": "Root Canal + Crown",
+              "toothSaved": "Yes (Natural Tooth)",
+              "visits": "1–2 Visits",
+              "comfort": "Painless under numbing",
+              "bestFor": "Deep decay or nerve pain with intact root"
+            },
+            {
+              "option": "Simple Dental Filling",
+              "toothSaved": "Yes",
+              "visits": "1 Visit (20 min)",
+              "comfort": "Minimal/no numbing",
+              "bestFor": "Early surface cavities before nerve is reached"
+            },
+            {
+              "option": "Extraction + Implant",
+              "toothSaved": "No (Replaced)",
+              "visits": "2–3 Visits over months",
+              "comfort": "Minor surgical recovery",
+              "bestFor": "Severely fractured or non-restorable teeth"
+            }
+          ],
+          "steps_json": [
+            {
+              "step": "01",
+              "title": "Digital X-Ray & Numbing",
+              "desc": "Instant low-radiation X-ray locates the infection; numbing gel + local anesthesia ensures a pain-free start."
+            },
+            {
+              "step": "02",
+              "title": "Gentle Rotary Cleaning",
+              "desc": "Infected pulp is carefully removed and canals are shaped cleanly using quiet rotary instruments."
+            },
+            {
+              "step": "03",
+              "title": "Disinfection & Sealing",
+              "desc": "Canals are disinfected and sealed tightly with biocompatible filling so bacteria cannot re-enter."
+            },
+            {
+              "step": "04",
+              "title": "Protective Crown (Cap)",
+              "desc": "For back molars or weak teeth, a natural-looking ceramic/zirconia cap restores full chewing strength."
+            }
+          ],
+          "care_tabs_json": {
+            "before": [
+              "Eat a light meal 1–2 hours before your visit.",
+              "Inform the dentist about diabetes, blood thinners, or pregnancy so we tailor your care safely."
+            ],
+            "during": [
+              "Topical numbing gel is applied before anesthesia—most patients feel only gentle pressure.",
+              "Most single-sitting root canals finish in 45–60 minutes in one calm appointment."
+            ],
+            "after": [
+              "Avoid chewing on the treated side until numbness wears off (2–3 hours).",
+              "Mild bite tenderness for 24–48 hours is normal and settles quickly.",
+              "Do not skip your permanent crown/cap if advised—an uncapped molar can fracture under chewing force."
+            ]
+          },
+          "plan_factors_json": [
+            "Which tooth is affected (front teeth have 1 canal; back molars have 3–4 canals)",
+            "Single-sitting vs. 2 visits if there is active swelling or curved roots",
+            "Whether a protective crown (PFM or Zirconia) is needed afterward",
+            "First-time procedure vs. re-treatment of an older root canal"
+          ],
+          "clinical_note": "Most patients walk in terrified of the phrase 'root canal' and walk out surprised that it felt like a routine filling. Our priority is complete numbing before we begin and an honest X-ray review so we only recommend a root canal when a simple filling cannot save the tooth.",
+          "faqs_json": [
+            {
+              "q": "Is root canal treatment painful?",
+              "a": "No. With numbing gel, buffered local anesthesia, and rotary instruments, the procedure is painless and relieves the throbbing ache you walked in with."
+            },
+            {
+              "q": "Can my root canal be done in a single sitting?",
+              "a": "Many uncomplicated cases finish in one 45–60 minute sitting. If there is active swelling or curved roots, 2 visits are safer."
+            },
+            {
+              "q": "Is a dental cap (crown) mandatory after a root canal?",
+              "a": "Strongly recommended for back chewing teeth (molars/premolars) to prevent fractures; front teeth with minimal damage sometimes only need a bonded filling."
+            },
+            {
+              "q": "Can I eat normally after a root canal?",
+              "a": "Wait 2–3 hours until numbness fades, eat soft foods on the opposite side for 1–2 days, and chew normally once the final restoration/cap is placed."
+            },
+            {
+              "q": "What happens if I just take painkillers and delay treatment?",
+              "a": "Painkillers mask symptoms briefly while infection spreads, risking facial swelling, abscess formation, or losing a saveable tooth."
+            },
+            {
+              "q": "Is root canal treatment safe during pregnancy or for diabetic patients?",
+              "a": "Yes, with proper precautions—checking blood sugar control for diabetics and coordinating safe timing/anesthesia during pregnancy."
+            }
+          ]
+        }
+      },
+      {
+        "id": "treatment-implants",
+        "slug": "dental-implants",
+        "status": "published",
+        "taxonomies": {
+          "treatment_category": [
+            "restorative"
+          ]
+        },
+        "bylines": [
+          {
+            "byline": "byline-lead-dentist",
+            "roleLabel": "Clinically Reviewed By"
+          }
+        ],
+        "data": {
+          "title": "Dental Implants",
+          "headline": "Eat & Smile Naturally Again — 3D-Planned Dental Implants",
+          "excerpt": "Permanent titanium tooth replacement that looks, feels, and chews just like a natural tooth.",
+          "icon_key": "implants",
+          "duration": "60–90 Mins",
+          "visits": "2–3 Visits",
+          "comfort_note": "Local Anesthesia",
+          "symptoms_json": [
+            "Single or multiple missing teeth",
+            "Loose dentures slipping while speaking or eating",
+            "Difficulty chewing hard foods",
+            "Neighboring teeth tilting into an old gap"
+          ],
+          "why_matters": "Leaving a missing tooth gap causes neighboring teeth to tilt and jawbone to shrink over time. A titanium implant acts like a natural root, preserving jawbone strength and confident chewing.",
+          "comparison_json": [
+            {
+              "option": "Dental Implant",
+              "toothSaved": "Preserves adjacent teeth",
+              "visits": "2–3 Visits",
+              "comfort": "Local anesthesia",
+              "bestFor": "Long-term fixed replacement"
+            },
+            {
+              "option": "Dental Bridge",
+              "toothSaved": "Shapes 2 neighbor teeth",
+              "visits": "2 Visits",
+              "comfort": "Non-surgical",
+              "bestFor": "Faster fixed option when bone is limited"
+            },
+            {
+              "option": "Removable Denture",
+              "toothSaved": "Rests on gums",
+              "visits": "3–4 Visits",
+              "comfort": "Non-surgical",
+              "bestFor": "Removable replacement"
+            }
+          ],
+          "steps_json": [
+            {
+              "step": "01",
+              "title": "3D CBCT Bone Scan",
+              "desc": "Precise jawbone density and nerve mapping before planning."
+            },
+            {
+              "step": "02",
+              "title": "Gentle Implant Placement",
+              "desc": "Painless titanium root placement under local numbing."
+            },
+            {
+              "step": "03",
+              "title": "Bone Integration",
+              "desc": "Bone bonds naturally with the implant over 8–12 weeks."
+            },
+            {
+              "step": "04",
+              "title": "Custom Ceramic Crown",
+              "desc": "Shade-matched crown fixed for a natural bite."
+            }
+          ],
+          "care_tabs_json": {
+            "before": [
+              "Bring recent HbA1c (if diabetic) or blood-thinner details.",
+              "Have a normal meal beforehand."
+            ],
+            "during": [
+              "Complete local numbing ensures a calm, predictable placement."
+            ],
+            "after": [
+              "Cold pack for 24 hours; soft cool-to-warm foods for 2–3 days; avoid smoking during healing."
+            ]
+          },
+          "plan_factors_json": [
+            "Number of implants needed",
+            "Jawbone density / grafting requirement",
+            "Crown material (Zirconia vs. PFM)"
+          ],
+          "clinical_note": "A 3D CBCT scan before quoting lets us measure your exact bone height and nerve safety—so your implant plan is predictable from day one.",
+          "faqs_json": [
+            {
+              "q": "Is dental implant placement painful?",
+              "a": "Done under effective local anesthesia so you feel mild vibration, not sharp pain. Post-visit soreness is usually milder than an extraction."
+            },
+            {
+              "q": "Can diabetic or senior patients get dental implants?",
+              "a": "Yes, once blood sugar and general health are well controlled; age alone is rarely a barrier."
+            },
+            {
+              "q": "How long do dental implants last?",
+              "a": "With daily brushing, flossing, and 6-month checkups, the titanium implant post can last decades."
+            }
+          ]
+        }
+      },
+      {
+        "id": "treatment-aligners",
+        "slug": "clear-aligners",
+        "status": "published",
+        "taxonomies": {
+          "treatment_category": [
+            "orthodontics"
+          ]
+        },
+        "bylines": [
+          {
+            "byline": "byline-lead-dentist",
+            "roleLabel": "Clinically Reviewed By"
+          }
+        ],
+        "data": {
+          "title": "Clear Aligners",
+          "headline": "Straighten Teeth Discreetly — Specialist-Planned Clear Aligners",
+          "excerpt": "Transparent, removable trays to straighten crowded or gapped teeth without metal brackets.",
+          "icon_key": "aligners",
+          "duration": "30 Min 3D Scan",
+          "visits": "Check-in every 6–8 Wks",
+          "comfort_note": "Removable & Metal-Free",
+          "symptoms_json": [
+            "Crowded or overlapping teeth",
+            "Visible gaps between front teeth",
+            "Mild overbite or underbite",
+            "Teeth shifting after childhood braces"
+          ],
+          "why_matters": "Crowded or misaligned teeth are harder to clean and wear unevenly. Specialist-planned aligners straighten teeth gradually while letting you eat and brush normally.",
+          "comparison_json": [
+            {
+              "option": "Clear Aligners",
+              "toothSaved": "Removable & invisible",
+              "visits": "Every 6–8 weeks",
+              "comfort": "Smooth edges, no wires",
+              "bestFor": "Working adults & teens"
+            },
+            {
+              "option": "Ceramic / Metal Braces",
+              "toothSaved": "Fixed on teeth",
+              "visits": "Every 4 weeks",
+              "comfort": "Initial adjustment",
+              "bestFor": "Complex bite corrections"
+            }
+          ],
+          "steps_json": [
+            {
+              "step": "01",
+              "title": "3D Digital Smile Scan",
+              "desc": "Gag-free scan with a preview of your projected smile."
+            },
+            {
+              "step": "02",
+              "title": "Custom Aligner Sets",
+              "desc": "Precision-trimmed BPA-free transparent trays."
+            },
+            {
+              "step": "03",
+              "title": "Wear & Progress Checks",
+              "desc": "Wear 20–22 hrs/day; switch trays every 10–14 days."
+            },
+            {
+              "step": "04",
+              "title": "Retainers",
+              "desc": "Nighttime retainers lock your aligned smile in place."
+            }
+          ],
+          "care_tabs_json": {
+            "before": [
+              "Ensure cavities and routine cleaning are done before scanning."
+            ],
+            "during": [
+              "Remove trays only while eating, drinking hot beverages, and brushing."
+            ],
+            "after": [
+              "Wear retainers as advised so teeth never shift back."
+            ]
+          },
+          "plan_factors_json": [
+            "Complexity of crowding or bite correction",
+            "Total number of aligner trays needed",
+            "Orthodontist supervision plan"
+          ],
+          "clinical_note": "Every aligner case is planned by an MDS Orthodontist—not an unsupervised mail-order kit—so your bite stays healthy as your smile aligns.",
+          "faqs_json": [
+            {
+              "q": "How many hours a day must aligners be worn?",
+              "a": "20 to 22 hours daily, removing them only for meals, hot drinks, and brushing."
+            },
+            {
+              "q": "Will aligners affect my speech?",
+              "a": "A slight lisp for the first 2–3 days is common and fades quickly."
+            }
+          ]
+        }
+      },
+      {
+        "id": "treatment-whitening",
+        "slug": "teeth-whitening",
+        "status": "published",
+        "taxonomies": {
+          "treatment_category": [
+            "cosmetic"
+          ]
+        },
+        "bylines": [
+          {
+            "byline": "byline-lead-dentist",
+            "roleLabel": "Clinically Reviewed By"
+          }
+        ],
+        "data": {
+          "title": "Teeth Whitening",
+          "headline": "Safe, Sensitivity-Controlled In-Clinic Teeth Whitening",
+          "excerpt": "Clinically monitored LED brightening to lift tea, coffee, and aging stains in a single session.",
+          "icon_key": "whitening",
+          "duration": "45 Mins",
+          "visits": "1 Visit",
+          "comfort_note": "Gum-Protected & Enamel-Safe",
+          "symptoms_json": [
+            "Tea, coffee, or spice staining",
+            "Yellowing from aging",
+            "Upcoming wedding or event",
+            "Dull smile despite regular brushing"
+          ],
+          "why_matters": "Dentist-supervised whitening protects gums with a barrier and uses controlled clinical gels for predictable shade lift without harsh abrasion.",
+          "comparison_json": [
+            {
+              "option": "In-Clinic LED Whitening",
+              "toothSaved": "Immediate shade lift",
+              "visits": "1 Visit (45 min)",
+              "comfort": "Gum barrier + desensitizer",
+              "bestFor": "Noticeable brightening"
+            },
+            {
+              "option": "Scaling & Polishing",
+              "toothSaved": "Removes surface tartar",
+              "visits": "1 Visit (30 min)",
+              "comfort": "Ultrasonic gentle",
+              "bestFor": "Routine plaque & stain cleanup"
+            }
+          ],
+          "steps_json": [
+            {
+              "step": "01",
+              "title": "Shade Check & Polish",
+              "desc": "Record baseline shade and clear surface plaque."
+            },
+            {
+              "step": "02",
+              "title": "Gum Shielding",
+              "desc": "Protective gel covers gums and soft tissue."
+            },
+            {
+              "step": "03",
+              "title": "Activated Whitening",
+              "desc": "Two gentle 15-minute clinical gel cycles."
+            },
+            {
+              "step": "04",
+              "title": "Desensitizing Finish",
+              "desc": "Mineral paste soothes enamel immediately."
+            }
+          ],
+          "care_tabs_json": {
+            "before": [
+              "A quick scaling beforehand helps whitening gel work evenly."
+            ],
+            "during": [
+              "Relax while gums remain fully shielded."
+            ],
+            "after": [
+              "Avoid dark tea, coffee, turmeric, or red wine for 48 hours."
+            ]
+          },
+          "plan_factors_json": [
+            "Depth of staining",
+            "Need for pre-whitening scaling",
+            "Existing front crowns/fillings"
+          ],
+          "clinical_note": "We check for hidden cavities or thin enamel before whitening so you get a bright result without lingering sensitivity.",
+          "faqs_json": [
+            {
+              "q": "Does teeth whitening damage enamel?",
+              "a": "No. Professionally monitored whitening lifts stains from enamel pores without thinning tooth structure."
+            },
+            {
+              "q": "How long do results last?",
+              "a": "Typically 6 to 18 months depending on tea/coffee habits and routine cleanings."
+            }
+          ]
+        }
+      },
+      {
+        "id": "treatment-checkup",
+        "slug": "dental-checkup-scaling",
+        "status": "published",
+        "taxonomies": {
+          "treatment_category": [
+            "preventive"
+          ]
+        },
+        "bylines": [
+          {
+            "byline": "byline-lead-dentist",
+            "roleLabel": "Clinically Reviewed By"
+          }
+        ],
+        "data": {
+          "title": "Checkup & Scaling",
+          "headline": "Preventive Dental Checkup & Gentle Ultrasonic Cleaning",
+          "excerpt": "Full tooth-by-tooth exam, gum health check, and gentle tartar removal to stop problems early.",
+          "icon_key": "checkup",
+          "duration": "30–40 Mins",
+          "visits": "1 Visit",
+          "comfort_note": "Ultrasonic Water-Cooled",
+          "symptoms_json": [
+            "Bleeding gums while brushing",
+            "Bad breath or yellow tartar",
+            "6+ months since last visit",
+            "Mild occasional sensitivity"
+          ],
+          "why_matters": "Most serious dental pain starts as silent plaque or tiny cavities. A 30-minute preventive checkup catches issues when they are simple and quick to fix.",
+          "comparison_json": [
+            {
+              "option": "Routine Scaling & Polish",
+              "toothSaved": "Prevents gum disease",
+              "visits": "Every 6 months",
+              "comfort": "Gentle vibration",
+              "bestFor": "All adults & teens"
+            },
+            {
+              "option": "Deep Gum Cleaning",
+              "toothSaved": "Treats deeper pockets",
+              "visits": "1–2 Visits",
+              "comfort": "Numbing gel",
+              "bestFor": "Swollen or receding gums"
+            }
+          ],
+          "steps_json": [
+            {
+              "step": "01",
+              "title": "Oral & Gum Screening",
+              "desc": "Check teeth, gums, and existing fillings."
+            },
+            {
+              "step": "02",
+              "title": "Ultrasonic Scaling",
+              "desc": "Water-cooled vibrations lift hardened tartar gently."
+            },
+            {
+              "step": "03",
+              "title": "Smooth Polishing",
+              "desc": "Polishes away surface tea/coffee stains."
+            },
+            {
+              "step": "04",
+              "title": "Prevention Plan",
+              "desc": "Clear home-care tips with zero upsell pressure."
+            }
+          ],
+          "care_tabs_json": {
+            "before": [
+              "Brush normally before your appointment."
+            ],
+            "during": [
+              "Let us know if any spot feels sensitive—we adjust the setting immediately."
+            ],
+            "after": [
+              "Mild cold sensitivity for 24 hours after heavy tartar removal is normal."
+            ]
+          },
+          "plan_factors_json": [
+            "Amount of tartar buildup",
+            "Whether baseline digital X-rays are needed"
+          ],
+          "clinical_note": "Scaling does NOT loosen healthy teeth—it removes hardened tartar that silently damages gums and bone underneath.",
+          "faqs_json": [
+            {
+              "q": "Does scaling weaken or loosen teeth?",
+              "a": "No. Ultrasonic scaling only vibrates off hardened tartar deposits without cutting healthy tooth enamel."
+            }
+          ]
+        }
+      },
+      {
+        "id": "treatment-pediatric",
+        "slug": "kids-dentistry",
+        "status": "published",
+        "taxonomies": {
+          "treatment_category": [
+            "pediatric"
+          ]
+        },
+        "bylines": [
+          {
+            "byline": "byline-lead-dentist",
+            "roleLabel": "Clinically Reviewed By"
+          }
+        ],
+        "data": {
+          "title": "Kids Dentistry",
+          "headline": "Fear-Free Kids Dentistry for Growing Smiles",
+          "excerpt": "Calm cavity prevention, fluoride shields, and gentle care designed to build lifelong dental confidence.",
+          "icon_key": "pediatric",
+          "duration": "30 Mins",
+          "visits": "1 Visit",
+          "comfort_note": "Child-Friendly Tell-Show-Do",
+          "symptoms_json": [
+            "First dental checkup (age 1+)",
+            "Black spots or cavities on milk teeth",
+            "Child complaining of pain while eating sweets",
+            "Crooked incoming permanent teeth"
+          ],
+          "why_matters": "Healthy milk teeth guide permanent teeth into the right position. Early gentle visits prevent dental fear later in life.",
+          "comparison_json": [
+            {
+              "option": "Fluoride & Sealants",
+              "toothSaved": "Prevents molar decay",
+              "visits": "15–20 Mins",
+              "comfort": "Completely painless",
+              "bestFor": "Children ages 4–14"
+            },
+            {
+              "option": "Pediatric Filling / Pulp Care",
+              "toothSaved": "Saves milk tooth",
+              "visits": "1 Visit",
+              "comfort": "Gentle numbing",
+              "bestFor": "Active milk-tooth cavities"
+            }
+          ],
+          "steps_json": [
+            {
+              "step": "01",
+              "title": "Tell-Show-Do Welcome",
+              "desc": "Kids see tools playfully before any exam."
+            },
+            {
+              "step": "02",
+              "title": "Gentle Checkup",
+              "desc": "Check cavities, jaw spacing, and brushing habits."
+            },
+            {
+              "step": "03",
+              "title": "Protective Shield",
+              "desc": "Quick fluoride varnish or molar sealant if needed."
+            },
+            {
+              "step": "04",
+              "title": "Parent Care Guide",
+              "desc": "Practical brushing and snack tips for home."
+            }
+          ],
+          "care_tabs_json": {
+            "before": [
+              "Talk positively about the visit—avoid words like 'pain' or 'injection'."
+            ],
+            "during": [
+              "Parents stay right beside the child for reassurance."
+            ],
+            "after": [
+              "Avoid sticky sweets for 2 hours after fluoride varnish."
+            ]
+          },
+          "plan_factors_json": [
+            "Child's age and comfort level",
+            "Preventive shield vs. cavity treatment"
+          ],
+          "clinical_note": "We never rush a nervous child—building trust on the first visit makes every future checkup effortless.",
+          "faqs_json": [
+            {
+              "q": "Why treat cavities in milk teeth if they will fall out?",
+              "a": "Untreated decay causes pain, infection, and early tooth loss, which leads to crooked permanent teeth."
+            }
+          ]
+        }
+      },
+      {
+        "id": "treatment-crowns",
+        "slug": "crowns-and-veneers",
+        "status": "published",
+        "taxonomies": {
+          "treatment_category": [
+            "cosmetic"
+          ]
+        },
+        "bylines": [
+          {
+            "byline": "byline-lead-dentist",
+            "roleLabel": "Clinically Reviewed By"
+          }
+        ],
+        "data": {
+          "title": "Crowns & Veneers",
+          "headline": "Natural-Looking Zirconia Crowns & Porcelain Veneers",
+          "excerpt": "Custom shade-matched crowns and veneers to protect weak teeth or restore chipped, worn smiles.",
+          "icon_key": "crowns",
+          "duration": "45 Mins",
+          "visits": "2 Visits",
+          "comfort_note": "Digital Precision Fit",
+          "symptoms_json": [
+            "Broken, chipped, or worn-down tooth",
+            "Tooth needing protection after root canal",
+            "Severely stained front tooth",
+            "Small gaps or uneven tooth edges"
+          ],
+          "why_matters": "A well-fitted zirconia crown protects a fragile tooth from splitting, while ultra-thin veneers refine smile symmetry naturally.",
+          "comparison_json": [
+            {
+              "option": "Zirconia Crown",
+              "toothSaved": "Full 360° tooth protection",
+              "visits": "2 Visits",
+              "comfort": "Metal-free natural shade",
+              "bestFor": "Root-canal teeth & cracked molars"
+            },
+            {
+              "option": "Porcelain Veneer",
+              "toothSaved": "Minimal front-surface prep",
+              "visits": "2 Visits",
+              "comfort": "Conservative cosmetic",
+              "bestFor": "Front smile chips, gaps & shade"
+            }
+          ],
+          "steps_json": [
+            {
+              "step": "01",
+              "title": "Shade & Bite Assessment",
+              "desc": "Match natural tooth translucency and bite."
+            },
+            {
+              "step": "02",
+              "title": "Gentle Prep & Scan",
+              "desc": "Precise shaping + comfortable temporary cap."
+            },
+            {
+              "step": "03",
+              "title": "CAD/CAM Lab Craft",
+              "desc": "High-strength zirconia or porcelain fabrication."
+            },
+            {
+              "step": "04",
+              "title": "Final Bonding",
+              "desc": "Check comfort, bite, and natural look before sealing."
+            }
+          ],
+          "care_tabs_json": {
+            "before": [
+              "Tell us if you grind teeth at night so we pick the strongest ceramic."
+            ],
+            "during": [
+              "Local numbing keeps preparation completely comfortable."
+            ],
+            "after": [
+              "Avoid biting ice or hard shells directly on front veneers."
+            ]
+          },
+          "plan_factors_json": [
+            "Material choice (Zirconia, E-max, or PFM)",
+            "Number of teeth being restored"
+          ],
+          "clinical_note": "Digital shade matching ensures your crown blends seamlessly—no opaque 'fake' look or dark metal line at the gum.",
+          "faqs_json": [
+            {
+              "q": "How long do zirconia crowns last?",
+              "a": "Typically 10–15+ years with good brushing and regular dental checkups."
+            }
+          ]
+        }
+      },
+      {
+        "id": "treatment-gums",
+        "slug": "gum-and-wisdom-tooth-care",
+        "status": "published",
+        "taxonomies": {
+          "treatment_category": [
+            "restorative"
+          ]
+        },
+        "bylines": [
+          {
+            "byline": "byline-lead-dentist",
+            "roleLabel": "Clinically Reviewed By"
+          }
+        ],
+        "data": {
+          "title": "Gum & Wisdom Care",
+          "headline": "Gentle Gum Treatment & Wisdom Tooth Removal",
+          "excerpt": "Targeted care for bleeding gums, gum pockets, and painful impacted wisdom teeth with smooth healing.",
+          "icon_key": "gums",
+          "duration": "30–60 Mins",
+          "visits": "1–2 Visits",
+          "comfort_note": "Full Local Anesthesia / Laser",
+          "symptoms_json": [
+            "Pain or swelling at the very back of the jaw",
+            "Gums that bleed easily or feel tender",
+            "Food constantly trapped behind back tooth",
+            "Difficulty opening mouth fully"
+          ],
+          "why_matters": "Impacted wisdom teeth trap bacteria and damage neighboring molars, while untreated gum disease gradually weakens tooth support.",
+          "comparison_json": [
+            {
+              "option": "Wisdom Tooth Removal",
+              "toothSaved": "Protects adjacent molar",
+              "visits": "1 Visit + 7-day check",
+              "comfort": "Full local anesthesia",
+              "bestFor": "Impacted or repeatedly infected wisdom teeth"
+            },
+            {
+              "option": "Laser Gum Therapy",
+              "toothSaved": "Heals gum pockets",
+              "visits": "1–2 Visits",
+              "comfort": "Minimal bleeding",
+              "bestFor": "Swollen, bleeding, or infected gums"
+            }
+          ],
+          "steps_json": [
+            {
+              "step": "01",
+              "title": "Digital OPG / X-Ray",
+              "desc": "Check exact root angle and nearby nerve position."
+            },
+            {
+              "step": "02",
+              "title": "Complete Numbing",
+              "desc": "Confirm full numbness before starting."
+            },
+            {
+              "step": "03",
+              "title": "Gentle Procedure",
+              "desc": "Minimally invasive removal or laser gum cleaning."
+            },
+            {
+              "step": "04",
+              "title": "Recovery Kit & Follow-Up",
+              "desc": "Written healing checklist + 7-day check."
+            }
+          ],
+          "care_tabs_json": {
+            "before": [
+              "Eat a normal meal 1–2 hours before wisdom tooth removal."
+            ],
+            "during": [
+              "You feel gentle pressure, never sharp pain."
+            ],
+            "after": [
+              "Bite gently on gauze for 30–45 mins, avoid straws/spitting for 24 hours, and eat soft cool foods."
+            ]
+          },
+          "plan_factors_json": [
+            "Simple erupted extraction vs. surgically impacted wisdom tooth",
+            "Localized vs. full-mouth gum therapy"
+          ],
+          "clinical_note": "Not every wisdom tooth needs removal—we check your X-ray first and only recommend extraction when it is causing infection, decay, or crowding.",
+          "faqs_json": [
+            {
+              "q": "How many days does wisdom tooth recovery take?",
+              "a": "Most patients return to desk work in 1–2 days, with gum healing progressing comfortably over 5–7 days."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "menus": [
+    {
+      "name": "primary",
+      "label": "Primary Navigation",
+      "items": [
+        {
+          "type": "page",
+          "label": "Home",
+          "ref": "page-home",
+          "collection": "pages"
+        },
+        {
+          "type": "page",
+          "label": "About",
+          "ref": "page-about",
+          "collection": "pages"
+        },
+        {
+          "type": "page",
+          "label": "Treatments",
+          "ref": "page-treatments",
+          "collection": "pages"
+        },
+        {
+          "type": "page",
+          "label": "Contact",
+          "ref": "page-contact",
+          "collection": "pages"
+        },
+        {
+          "type": "page",
+          "label": "Book Appointment",
+          "ref": "page-appointment",
+          "collection": "pages"
+        }
+      ]
+    },
+    {
+      "name": "footer_treatments",
+      "label": "Footer Core Treatments",
+      "items": [
+        {
+          "type": "custom",
+          "label": "Root Canal Treatment",
+          "url": "/treatments/root-canal-treatment",
+          "target": "_self"
+        },
+        {
+          "type": "custom",
+          "label": "Dental Implants",
+          "url": "/treatments/dental-implants",
+          "target": "_self"
+        },
+        {
+          "type": "custom",
+          "label": "Clear Aligners",
+          "url": "/treatments/clear-aligners",
+          "target": "_self"
+        },
+        {
+          "type": "custom",
+          "label": "Crowns & Veneers",
+          "url": "/treatments/crowns-and-veneers",
+          "target": "_self"
+        },
+        {
+          "type": "custom",
+          "label": "Gum & Wisdom Care",
+          "url": "/treatments/gum-and-wisdom-tooth-care",
+          "target": "_self"
+        }
+      ]
+    }
+  ]
 }
