@@ -8,6 +8,7 @@ const treatmentLinks = [
   ["Checkup & Scaling","dental-checkup-scaling","🩺"],["Kids Dentistry","kids-dentistry","🧸"],
   ["Crowns & Veneers","crowns-and-veneers","💎"],["Gum & Wisdom Care","gum-and-wisdom-tooth-care","🌿"]
 ];
+const symptomKeywords: Record<string, string> = {"root-canal-treatment":"Root Canal Treatment Stop Toothache & Save Your Natural Tooth — Painless Root Canal Treatment Throbbing toothache that worsens at night Lingering pain after hot tea/coffee or cold water Sharp pain when biting or chewing food Swollen gum or small pimple-like bump near a tooth Deep black cavity or cracked tooth Tooth darkening after an old injury","dental-implants":"Dental Implants Eat & Smile Naturally Again — 3D-Planned Dental Implants Single or multiple missing teeth Loose dentures slipping while speaking or eating Difficulty chewing hard foods Neighboring teeth tilting into an old gap","clear-aligners":"Clear Aligners Straighten Teeth Discreetly — Specialist-Planned Clear Aligners Crowded or overlapping teeth Visible gaps between front teeth Mild overbite or underbite Teeth shifting after childhood braces","teeth-whitening":"Teeth Whitening Safe, Sensitivity-Controlled In-Clinic Teeth Whitening Tea, coffee, or spice staining Yellowing from aging Upcoming wedding or event Dull smile despite regular brushing","dental-checkup-scaling":"Checkup & Scaling Preventive Dental Checkup & Gentle Ultrasonic Cleaning Bleeding gums while brushing Bad breath or yellow tartar 6+ months since last visit Mild occasional sensitivity","kids-dentistry":"Kids Dentistry Fear-Free Kids Dentistry for Growing Smiles First dental checkup (age 1+) Black spots or cavities on milk teeth Child complaining of pain while eating sweets Crooked incoming permanent teeth","crowns-and-veneers":"Crowns & Veneers Natural-Looking Zirconia Crowns & Porcelain Veneers Broken, chipped, or worn-down tooth Tooth needing protection after root canal Severely stained front tooth Small gaps or uneven tooth edges","gum-and-wisdom-tooth-care":"Gum & Wisdom Care Gentle Gum Treatment & Wisdom Tooth Removal Pain or swelling at the very back of the jaw Gums that bleed easily or feel tender Food constantly trapped behind back tooth Difficulty opening mouth fully"};
 const whatsAppUrl = (number?: string, message = "Hello, I'd like an appointment") => {
   const digits = (number ?? "").replace(/\D/g, "");
   return /^91\d{10}$/.test(digits) ? "https://wa.me/" + digits + "?text=" + encodeURIComponent(message) : null;
@@ -47,7 +48,7 @@ const whatsAppUrl = (number?: string, message = "Hello, I'd like an appointment"
       <h2>{b.heading}</h2><p>{b.subcopy}</p>
       {b.enableSearch !== false && <input class="symptom-search" type="search" placeholder="Search by treatment or concern" aria-label="Search dental treatments" />}
       <div class="treatments-grid symptom-list">{treatmentLinks.map(([name,slug,emoji]) => (
-        <a class="dental-card symptom-item" data-search={name.toLowerCase().replace(/[^a-z ]/g," ")} href={"/treatments/" + slug}><span aria-hidden="true">{emoji} </span>{name} →</a>
+        <a class="dental-card symptom-item" data-search={(name + " " + (symptomKeywords[slug] || "")).toLowerCase()} href={"/treatments/" + slug}><span aria-hidden="true">{emoji} </span>{name} →</a>
       ))}</div>
     </section>
   ) : b._type === "faq_accordion" ? (
@@ -87,7 +88,9 @@ const whatsAppUrl = (number?: string, message = "Hello, I'd like an appointment"
     input.addEventListener("input", () => {
       const query = input.value.toLowerCase().trim();
       input.parentElement?.querySelectorAll<HTMLElement>(".symptom-item").forEach(el => {
-        el.hidden = !el.textContent?.toLowerCase().includes(query);
+        const terms = query.split(/\\s+/).filter(Boolean);
+        const haystack = el.dataset.search || el.textContent?.toLowerCase() || "";
+        el.hidden = !terms.every(term => haystack.includes(term));
       });
     });
   });
